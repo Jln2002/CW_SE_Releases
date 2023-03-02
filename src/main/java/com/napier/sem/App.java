@@ -18,8 +18,10 @@ public class App
 
         // Connect to database
         a.connect();
+          // call the SQL statements here
 
-        a.getCountries();
+        a.getCountriesLargestPopToSmallest();
+        a.getCountriesContinentLargeToSmall();
         // Disconnect from database
         a.disconnect();
     }
@@ -82,8 +84,8 @@ public class App
             }
         }
     }
-
-    public void getCountries()
+  //  sql statements here and below
+    public void getCountriesLargestPopToSmallest()
     {
         try
         {
@@ -91,9 +93,7 @@ public class App
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT * "
-                            + "FROM country "
-                            + "ORDER BY Population DESC";
+                    "SELECT * " + "FROM country " + "ORDER BY Population DESC";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Return new employee if valid.
@@ -108,7 +108,33 @@ public class App
         catch (Exception e)
         {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get employee details");
+            System.out.println("Failed to Complete Queries ");
+        }
+    }
+    public void getCountriesContinentLargeToSmall()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT Name as country AND population AND Continent  " + "FROM country " + "ORDER BY Population DESC";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Return new employee if valid.
+            // Check one is returned
+            while (rset.next())
+            {
+                int pop = rset.getInt("Population");
+                String name = rset.getString("Name");
+                System.out.println("" + name + "\t" + pop);
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to Complete Queries ");
         }
     }
 }
