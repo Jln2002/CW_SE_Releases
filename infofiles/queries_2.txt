@@ -1,0 +1,30 @@
+
+/*The top N populated cities in the world where N is provided by the user */
+SELECT Name As City, Population
+FROM city
+ORDER BY Population DESC
+LIMIT 5;
+
+/*The top N populated cities in a continent where N is provided by the user*/
+SELECT city.Name As City, city.Population, country.Continent
+FROM city JOIN country on city.CountryCode=country.Code 
+ORDER BY Population DESC
+LIMIT 5;
+
+/*The top N populated cities in a region where N is provided by the user*/
+SELECT city.Name As City, city.Population, country.Region
+FROM city JOIN country on city.CountryCode=country.Code 
+ORDER BY Population DESC
+LIMIT 5;
+
+/*The top N populated cities in a country where N is provided by the user*/
+SELECT city.Name As City , city.Population, country.Name As Country
+FROM city JOIN country on city.CountryCode=country.Code 
+ORDER BY Population DESC
+LIMIT 5;
+
+/*The top N populated cities in a district where N is provided by the user*/
+SELECT Name As City, Population, District
+FROM city
+ORDER BY Population DESC
+LIMIT 5;
