@@ -21,7 +21,20 @@ public class App
           // call the SQL statements here
 
         a.getCountriesLargestPopToSmallest();
+        for ( int i = 0 ; i <= 10; i++)
+        {
+            System.out.println("//////////////////////////");
+        }
         a.getCountriesContinentLargeToSmall();
+        for ( int i = 0 ; i <= 10; i++)
+        {
+            System.out.println("//////////////////////////");
+        }
+        a.getCountriesregionLargeToSmall();
+        for ( int i = 0 ; i <= 10; i++)
+        {
+            System.out.println("//////////////////////////");
+        }
         // Disconnect from database
         a.disconnect();
     }
@@ -120,7 +133,7 @@ public class App
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT Name as country, Population , Continent  " + "FROM country " + "ORDER BY Population DESC";
+                    "SELECT *  " + "FROM country " + " ORDER BY Population DESC";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Return new employee if valid.
@@ -129,7 +142,36 @@ public class App
             {
                 int pop = rset.getInt("Population");
                 String name = rset.getString("Name");
-                System.out.println("" + name + "\t" + pop);
+                String ContName = rset.getString("Continent");
+                System.out.println("" + name + "\t" + pop + "\t" + ContName);
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to Complete Queries ");
+        }
+    }
+
+    public void getCountriesregionLargeToSmall()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT * " + "FROM country " + "ORDER BY Population DESC";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Return new employee if valid.
+            // Check one is returned
+            while (rset.next())
+            {
+                int pop = rset.getInt("Population");
+                String name = rset.getString("Name");
+                String RegionName = rset.getString("Region");
+                System.out.println("" + name + "\t" + pop + "\t" + RegionName);
             }
         }
         catch (Exception e)
