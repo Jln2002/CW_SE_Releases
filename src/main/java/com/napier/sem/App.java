@@ -48,7 +48,8 @@ public class App
             try
             {
                 // Wait a bit for db to start
-                Thread.sleep(0);
+                Thread.sleep(1000);
+                System.out.println("finished waiting");
                 // Connect to database
                 con = DriverManager.getConnection("jdbc:mysql://localhost:33060/world?useSSL=false", "root", "example");
                 System.out.println("Successfully connected");
@@ -119,7 +120,7 @@ public class App
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT Name as country AND population AND Continent  " + "FROM country " + "ORDER BY Population DESC";
+                    "SELECT Name as country, Population , Continent  " + "FROM country " + "ORDER BY Population DESC";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Return new employee if valid.
