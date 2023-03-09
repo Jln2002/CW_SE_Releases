@@ -1,0 +1,58 @@
+QUERIES;
+/*All the countries IN the world organised BY largest population TO smallest*/ 
+SELECT NAME As Country, Population
+FROM country
+ORDER BY Population DESC;
+
+/*All the countries IN a continent organised BY largest population TO smallest*/ 
+SELECT NAME As Country, Population, Continent
+FROM country
+ORDER BY Population DESC;
+
+/*All the countries IN a region organised BY largest population TO smallest*/ 
+SELECT NAME As Country, Population, Region
+FROM country
+ORDER BY Population DESC;
+
+/*The top N populated countries IN the world WHERE N IS provided BY the USER*/ 
+SELECT NAME As Country, Population
+FROM country
+ORDER BY Population DESC
+LIMIT 5;
+
+/*The top N populated countries IN a continent WHERE N IS provided BY the USER*/ 
+SELECT Name As Country, Population, Continent
+FROM country
+ORDER BY Population DESC
+LIMIT 5;
+
+/*The top N populated countries in a region where N is provided by the user*/ 
+SELECT Name As Country, Population, Region
+FROM country
+ORDER BY Population DESC
+LIMIT 5;
+
+/*All the cities in the world organised by largest population to smallest*/ 
+SELECT Name As City, Population
+FROM city
+ORDER BY Population DESC;
+
+/*All the cities in a continent organised by largest population to smallest*/ 
+SELECT city.Name As City, city.Population, country.Continent
+FROM city JOIN country on city.CountryCode=country.Code 
+ORDER BY Population DESC;
+
+/*All the cities in a region organised by largest population to smallest */
+SELECT city.Name As City, city.Population, country.Region
+FROM city JOIN country on city.CountryCode=country.Code 
+ORDER BY Population DESC;
+
+/*All the cities in a country organised by largest population to smallest */
+SELECT city.Name As City, city.Population, country.Name As Country
+FROM city JOIN country on city.CountryCode=country.Code 
+ORDER BY Population DESC;
+
+/*All the cities in a district organised by largest population to smallest */
+SELECT Name As City, Population, District
+FROM city
+ORDER BY Population DESC;
