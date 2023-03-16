@@ -98,6 +98,8 @@ public class App
             }
         }
     }
+
+
   //  sql statements here and below
     public void getCountriesLargestPopToSmallest()
     {
@@ -125,6 +127,8 @@ public class App
             System.out.println("Failed to Complete Queries ");
         }
     }
+
+
     public void getCountriesContinentLargeToSmall()
     {
         try
@@ -152,6 +156,8 @@ public class App
             System.out.println("Failed to Complete Queries ");
         }
     }
+
+
 
     public void getCountriesregionLargeToSmall()
     {
