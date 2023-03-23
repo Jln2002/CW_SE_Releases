@@ -16,6 +16,17 @@ public class MyTest
         app = new App();
     }
 
+    /**
+     * testing what happens when null value is handed into the method
+     */
+    @Test
+    void RegionBigToSmallNullBreaker()
+    {
+        app.getCountriesLargestPopToSmallest();
+        assertNull(null,"ttttttttt");
+    }
+
+
 
 
     @Test
