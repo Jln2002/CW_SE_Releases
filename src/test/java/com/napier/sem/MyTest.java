@@ -1,9 +1,21 @@
-import org.junit.jupiter.api.*;
+package com.napier.sem;
+
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 
-class MyTest
+public class MyTest
 {
+    static App app;
+
+    @BeforeAll
+    static void init()
+    {
+        app = new App();
+    }
+
     @Test
     void unitTest()
     {

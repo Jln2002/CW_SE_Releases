@@ -159,8 +159,9 @@ public class App
         }
     }
 
-
-
+    /**
+     *  sql for getting countries with regions biggest to smallest
+     */
     public void getCountriesregionLargeToSmall()
     {
         try
