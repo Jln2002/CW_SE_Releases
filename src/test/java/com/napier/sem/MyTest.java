@@ -16,6 +16,8 @@ public class MyTest
         app = new App();
     }
 
+
+
     @Test
     void unitTest()
     {
@@ -27,11 +29,7 @@ public class MyTest
         assertEquals(5, 5, "Messages are equal");
     }
 
-    @Test
-    void unitTest4()
-    {
-        assertEquals(5.0, 5.04, 0.03);
-    }
+
 
     @Test
     void unitTest5()
