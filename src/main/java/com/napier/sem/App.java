@@ -21,15 +21,11 @@ public class App
           // call the SQL statements here
 
         a.getCountriesLargestPopToSmallest();
-        for ( int i = 0 ; i <= 10; i++)
+        for ( int i = 0 ; i<=10; i++)
         {
-            System.out.println("//////////////////////////");
+            System.out.println("//////////////////////");
         }
-        a.getCountriesContinentLargeToSmall();
-        for ( int i = 0 ; i <= 10; i++)
-        {
-            System.out.println("//////////////////////////");
-        }
+
         a.getCountriesregionLargeToSmall();
         for ( int i = 0 ; i <= 10; i++)
         {
@@ -43,8 +39,6 @@ public class App
      */
     public void connect()
     {
-
-
         try
         {
             // Load Database driver
@@ -100,68 +94,65 @@ public class App
             }
         }
     }
-
-
   //  sql statements here and below
-    public void getCountriesLargestPopToSmallest()
-    {
-        try
-        {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect =
-                    "SELECT * " + "FROM country " + "ORDER BY Population DESC";
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            // Return new employee if valid.
-            // Check one is returned
-            while (rset.next())
-            {
-                int pop = rset.getInt("Population");
-                String name = rset.getString("Name");
-                System.out.println("" + name + "\t" + pop);
-            }
+  private Statement createeStatement(Connection con) throws SQLException {
+      return con.createStatement();
+  }
+    private String createSelectQuery() {
+        return "SELECT * FROM country ORDER BY Population DESC";
+    }
+    private ResultSet executeQuery(Statement stmt, String query) throws SQLException {
+        return stmt.executeQuery(query);
+    }
+    private void printCountryData(ResultSet rset) throws SQLException {
+        while (rset.next()) {
+            int pop = rset.getInt("Population");
+            String name = rset.getString("Name");
+            System.out.println("" + name + "\t" + pop);
         }
-        catch (Exception e)
-        {
+    }
+    public void getCountriesLargestPopToSmallest() {
+        try {
+            Statement stmt = createeStatement(con);
+            String strSelect = createSelectQuery();
+            ResultSet rset = executeQuery(stmt, strSelect);
+            printCountryData(rset);
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to Complete Queries ");
         }
     }
 
 
-    public void getCountriesContinentLargeToSmall()
-    {
-        try
-        {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect =
-                    "SELECT *  " + "FROM country " + " ORDER BY Population DESC";
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            // Return new employee if valid.
-            // Check one is returned
-            while (rset.next())
-            {
-                int pop = rset.getInt("Population");
-                String name = rset.getString("Name");
-                String ContName = rset.getString("Continent");
-                System.out.println("" + name + "\t" + pop + "\t" + ContName);
-            }
+
+    private String createSelectQueryForContinent(String continentName) {
+        return "SELECT Name AS Country, Population, Continent " +
+                "FROM country " +
+                "WHERE Continent = '" + continentName + "' " +
+                "ORDER BY Population DESC";
+    }
+    private ResultSet executeQueryForContinent(Statement stmt, String query) throws SQLException {
+        return stmt.executeQuery(query);
+    }
+    private void printCountryDataForContinent(ResultSet rset) throws SQLException {
+        while (rset.next()) {
+            String name = rset.getString("Country");
+            int population = rset.getInt("Population");
+            String continent = rset.getString("Continent");
+            System.out.println(name + "\t" + population + "\t" + continent);
         }
-        catch (Exception e)
-        {
+    }
+    public void getcountriesbycontinent(String continentName) {
+        try {
+            Statement stmt = createeStatement(con);
+            String strSelect = createSelectQueryForContinent(continentName);
+            ResultSet rset = executeQueryForContinent(stmt, strSelect);
+            printCountryDataForContinent(rset);
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to Complete Queries ");
         }
     }
-
-    /**
-     *  sql for getting countries with regions biggest to smallest
-     */
     public void getCountriesregionLargeToSmall()
     {
         try
