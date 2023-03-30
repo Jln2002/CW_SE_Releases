@@ -95,7 +95,7 @@ public class App
         }
     }
   //  sql statements here and below
-  private Statement createeStatement(Connection con) throws SQLException {
+ public Statement createStatement(Connection con) throws SQLException {
       return con.createStatement();
   }
     private String createSelectQuery() {
@@ -113,7 +113,7 @@ public class App
     }
     public void getCountriesLargestPopToSmallest() {
         try {
-            Statement stmt = createeStatement(con);
+            Statement stmt = createStatement(con);
             String strSelect = createSelectQuery();
             ResultSet rset = executeQuery(stmt, strSelect);
             printCountryData(rset);
@@ -124,14 +124,13 @@ public class App
     }
 
 
-
     private String createSelectQueryForContinent(String continentName) {
         return "SELECT Name AS Country, Population, Continent " +
                 "FROM country " +
                 "WHERE Continent = '" + continentName + "' " +
                 "ORDER BY Population DESC";
     }
-    private ResultSet executeQueryForContinent(Statement stmt, String query) throws SQLException {
+    public ResultSet executeQueryForContinent(Statement stmt, String query) throws SQLException {
         return stmt.executeQuery(query);
     }
     private void printCountryDataForContinent(ResultSet rset) throws SQLException {
@@ -144,7 +143,7 @@ public class App
     }
     public void getcountriesbycontinent(String continentName) {
         try {
-            Statement stmt = createeStatement(con);
+            Statement stmt = createStatement(con);
             String strSelect = createSelectQueryForContinent(continentName);
             ResultSet rset = executeQueryForContinent(stmt, strSelect);
             printCountryDataForContinent(rset);
@@ -153,6 +152,10 @@ public class App
             System.out.println("Failed to Complete Queries ");
         }
     }
+
+
+
+
     public void getCountriesregionLargeToSmall()
     {
         try

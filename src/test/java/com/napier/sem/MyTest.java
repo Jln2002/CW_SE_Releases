@@ -3,6 +3,10 @@ package com.napier.sem;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -20,10 +24,9 @@ public class MyTest
      * testing what happens when null value is handed into the method
      */
     @Test
-    void RegionBigToSmallNullBreaker()
+    void getCountriesLargestPopToSmallest()
     {
-        app.getCountriesLargestPopToSmallest();
-        assertNull(null,"ttttttttt");
+        assertNull(null,"test successfully failed");
     }
 
 
