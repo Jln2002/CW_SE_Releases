@@ -51,24 +51,30 @@ public class App
         }
 
         int retries = 10;
+        boolean needtowait = false;
         for (int i = 0; i < retries; ++i)
         {
             System.out.println("Connecting to database...");
             try
             {
                 // Wait a bit for db to start
-                Thread.sleep(1000);
+                if (needtowait == true) {
+                    Thread.sleep(10000);
+                }
                 System.out.println("finished waiting");
                 // Connect to database
                 con = DriverManager.getConnection("jdbc:mysql://localhost:33060/world?useSSL=false", "root", "example");
                 System.out.println("Successfully connected");
                 break;
+
             }
             catch (SQLException sqle)
             {
                 System.out.println("Failed to connect to database attempt " + Integer.toString(i));
                 System.out.println(sqle.getMessage());
+                needtowait = true;
             }
+
             catch (InterruptedException ie)
             {
                 System.out.println("Thread interrupted? Should not happen.");
