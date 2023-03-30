@@ -28,8 +28,11 @@ public class MyTest
     {
         assertNull(null,"test successfully failed");
     }
-
-
+    @Test
+    void createSelectQueryForContinent()
+    {
+        assertThrows(NullPointerException.class, this::throwsException);
+    }
 
 
     @Test

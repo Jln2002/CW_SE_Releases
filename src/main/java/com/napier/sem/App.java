@@ -124,7 +124,7 @@ public class App
     }
 
 
-    private String createSelectQueryForContinent(String continentName) {
+    public String createSelectQueryForContinent(String continentName) {
         return "SELECT Name AS Country, Population, Continent " +
                 "FROM country " +
                 "WHERE Continent = '" + continentName + "' " +
