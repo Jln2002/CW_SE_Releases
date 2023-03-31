@@ -10,7 +10,7 @@ public class App
     /**
      * Connection to MySQL database.
      */
-    private Connection con = null;
+    private static Connection con = null;
 
     public static void main(String[] args) {
         // Create new Application
@@ -25,12 +25,20 @@ public class App
         {
             System.out.println("//////////////////////");
         }
-
-        a.getCountriesregionLargeToSmall();
-        for ( int i = 0 ; i <= 10; i++)
+        a.getcountriesbycontinent("Europe");
+        for ( int i = 0 ; i<=10; i++)
         {
-            System.out.println("//////////////////////////");
+            System.out.println("//////////////////////");
         }
+        a.getCountriesByRegionLargestPopToSmallest ( "Western Europe");
+      for   ( int i = 0 ; i<=10; i++)
+        {
+            System.out.println("//////////////////////");
+        }
+
+
+      a.getTopPoppulatedCountries( 5);
+
         // Disconnect from database
         a.disconnect();
     }
@@ -129,7 +137,11 @@ public class App
         }
     }
 
-
+    /**
+     *
+     * Query for population organised in a continent "Europe" we can use any continent name
+     *
+     */
     public String createSelectQueryForContinent(String continentName) {
         return "SELECT Name AS Country, Population, Continent " +
                 "FROM country " +
@@ -160,33 +172,68 @@ public class App
     }
 
 
-
-
-    public void getCountriesregionLargeToSmall()
-    {
-        try
-        {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect =
-                    "SELECT * " + "FROM country " + "ORDER BY Population DESC";
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            // Return new employee if valid.
-            // Check one is returned
-            while (rset.next())
-            {
-                int pop = rset.getInt("Population");
-                String name = rset.getString("Name");
-                String RegionName = rset.getString("Region");
-                System.out.println("" + name + "\t" + pop + "\t" + RegionName);
-            }
+    /**
+     * Query for countries IN a region organised BY largest population TO smallest
+     */
+    private String createSelectQueryForRegion(String regionName) {
+        return "SELECT Name AS Country, Population, Region " +
+                "FROM country " +
+                "WHERE Region = '" + regionName + "' " +
+                "ORDER BY Population DESC";
+    }
+    private ResultSet executeQueryForRegion(Statement stmt, String query) throws SQLException {
+        return stmt.executeQuery(query);
+    }
+    private void printCountryDataForRegion(ResultSet rset) throws SQLException {
+        while (rset.next()) {
+            String name = rset.getString("Country");
+            int population = rset.getInt("Population");
+            String region = rset.getString("Region");
+            System.out.println(name + "\t" + population + "\t" + region);
         }
-        catch (Exception e)
-        {
+    }
+    public void getCountriesByRegionLargestPopToSmallest(String regionName) {
+        try {
+            Statement stmt = createStatement(con);
+            String strSelect = createSelectQueryForRegion(regionName);
+            ResultSet rset = executeQueryForRegion(stmt, strSelect);
+            printCountryDataForRegion(rset);
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to Complete Queries ");
         }
     }
+/**
+ * Query for The top N populated countries IN the world WHERE N IS provided BY the USER*
+ */
+public void getTopPoppulatedCountries(int n)
+{
+    try
+    {
+        // Create an SQL statement
+        Statement stmt = con.createStatement();
+        // Create string for SQL statement
+        String strSelect =
+                "SELECT NAME As Country, Population " +
+                        "FROM country " +
+                        "ORDER BY Population DESC " +
+                        "LIMIT " + n;
+        // Execute SQL statement
+        ResultSet rset = stmt.executeQuery(strSelect);
+
+        // Check one is returned
+        while (rset.next())
+        {
+            int pop = rset.getInt("Population");
+            String name = rset.getString("Country");
+            System.out.println("" + name + "\t" + pop);
+        }
+    }
+    catch (Exception e)
+    {
+        System.out.println(e.getMessage());
+        System.out.println("Failed to Complete Queries ");
+    }
+}
+
 }
