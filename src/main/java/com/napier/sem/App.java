@@ -44,11 +44,32 @@ public class App
         {
             System.out.println("//////////////////////");
         }
+        // Query 5
         getTopPopulatedCountriesInContinent(5, "Europe");
         for   ( int i = 0 ; i<=2; i++)
         {
             System.out.println("//////////////////////");
         }
+       // Query 6
+        getTopPopulatedCountriesInRegion(6, "Western Asia");
+        for   ( int i = 0 ; i<=2; i++)
+        {
+            System.out.println("//////////////////////");
+        }
+       // Query 7
+        a.getCityLargestPopToSmallest();
+        for   ( int i = 0 ; i<=2; i++)
+        {
+            System.out.println("//////////////////////");
+        }
+        // Query 8
+        a.getCitiesLargestPopToSmallestByContinent( "Asia");
+
+        for   ( int i = 0 ; i<=1; i++)
+        {
+            System.out.println("//////////////////////");
+        }
+
 
 
 
@@ -292,5 +313,104 @@ public void getTopPoppulatedCountries(int n)
             System.out.println("Failed to complete query.");
         }
     }
+    /**
+     * Query 6
+     * Populated countries in a region
+     */
+    public static void getTopPopulatedCountriesInRegion(int n, String region) {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT Name AS Country, Population, Region " +
+                            "FROM country " +
+                            "WHERE Region='" + region + "' " +
+                            "ORDER BY Population DESC " +
+                            "LIMIT " + n;
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            // Check one is returned
+            while (rset.next()) {
+                int pop = rset.getInt("Population");
+                String name = rset.getString("Country");
+                System.out.println(name + "\t" + pop);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to Complete Query");
+        }
+    }
+
+    /**
+     *
+     * Query 7
+     *
+     *
+     */
+    public Statement CcreateStatement(Connection con) throws SQLException {
+        return con.createStatement();
+    }
+    private String CcreateSelectQuery() {
+        return "SELECT Name As City, Population FROM city ORDER BY Population DESC";
+    }
+    private ResultSet eexecuteQuery(Statement stmt, String query) throws SQLException {
+        return stmt.executeQuery(query);
+    }
+
+    private void printCityData(ResultSet resultSet) throws SQLException {
+        while (resultSet.next()) {
+            int pop = resultSet.getInt("Population");
+            String name = resultSet.getString("City");
+            System.out.println("" + name + "\t" + pop);
+        }
+    }
+    public void getCityLargestPopToSmallest() {
+        try {
+            Statement stmt = CcreateStatement(con);
+            String strSelect = CcreateSelectQuery();
+            ResultSet rset = eexecuteQuery(stmt, strSelect);
+            printCityData(rset);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to Complete Queries ");
+        }
+    }
+
+    /**
+     *
+     * Query 8
+     */
+    public void getCitiesLargestPopToSmallestByContinent(String continent)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.Name As City, city.Population, country.Continent "
+                            + "FROM city JOIN country on city.CountryCode=country.Code "
+                            + "WHERE country.Continent='" + continent + "' "
+                            + "ORDER BY city.Population DESC";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Iterate through the result set and print the data
+            while (rset.next()) {
+                String cityName = rset.getString("City");
+                int population = rset.getInt("Population");
+                String continentName = rset.getString("Continent");
+                System.out.println(cityName + " | Population: " + population + " | Continent: " + continentName);
+            }
+        }
+        catch (SQLException e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }
+
 
 }
