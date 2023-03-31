@@ -19,25 +19,38 @@ public class App
         // Connect to database
         a.connect();
           // call the SQL statements here
-
+        // Query 1
         a.getCountriesLargestPopToSmallest();
-        for ( int i = 0 ; i<=10; i++)
+        for ( int i = 0 ; i<=2; i++)
         {
             System.out.println("//////////////////////");
         }
+        // Query 2
         a.getcountriesbycontinent("Europe");
-        for ( int i = 0 ; i<=10; i++)
+        for ( int i = 0 ; i<=2; i++)
         {
             System.out.println("//////////////////////");
         }
+        // Query 3
         a.getCountriesByRegionLargestPopToSmallest ( "Western Europe");
-      for   ( int i = 0 ; i<=10; i++)
+        for   ( int i = 0 ; i<=2; i++)
+        {
+            System.out.println("//////////////////////");
+        }
+
+       // Query 4
+        a.getTopPoppulatedCountries( 5);
+        for   ( int i = 0 ; i<=2; i++)
+        {
+            System.out.println("//////////////////////");
+        }
+        getTopPopulatedCountriesInContinent(5, "Europe");
+        for   ( int i = 0 ; i<=2; i++)
         {
             System.out.println("//////////////////////");
         }
 
 
-      a.getTopPoppulatedCountries( 5);
 
         // Disconnect from database
         a.disconnect();
@@ -109,6 +122,12 @@ public class App
         }
     }
   //  sql statements here and below
+
+    /**
+     *
+     * QUERY 1
+     *
+     */
  public Statement createStatement(Connection con) throws SQLException {
       return con.createStatement();
   }
@@ -138,7 +157,7 @@ public class App
     }
 
     /**
-     *
+     * QUERY 2
      * Query for population organised in a continent "Europe" we can use any continent name
      *
      */
@@ -172,7 +191,7 @@ public class App
     }
 
 
-    /**
+    /** QUERY 3
      * Query for countries IN a region organised BY largest population TO smallest
      */
     private String createSelectQueryForRegion(String regionName) {
@@ -203,7 +222,7 @@ public class App
             System.out.println("Failed to Complete Queries ");
         }
     }
-/**
+/** QUERY 4
  * Query for The top N populated countries IN the world WHERE N IS provided BY the USER*
  */
 public void getTopPoppulatedCountries(int n)
@@ -235,5 +254,43 @@ public void getTopPoppulatedCountries(int n)
         System.out.println("Failed to Complete Queries ");
     }
 }
+
+    /**
+     * Query 5
+     *
+     * /*The top N populated countries IN a continent WHERE N IS provided BY the USER*/
+
+    public static void getTopPopulatedCountriesInContinent(int n, String continent) {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT Name AS Country, Population, Continent " +
+                            "FROM country " +
+                            "WHERE Continent = '" + continent + "' " +
+                            "ORDER BY Population DESC " +
+                            "LIMIT " + n;
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            // Check if any records are returned
+            if (!rset.isBeforeFirst()) {
+                System.out.println("No records found.");
+                return;
+            }
+
+            // Print out the records
+            while (rset.next()) {
+                String name = rset.getString("Country");
+                int population = rset.getInt("Population");
+                System.out.println(name + "\t" + population);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to complete query.");
+        }
+    }
 
 }
