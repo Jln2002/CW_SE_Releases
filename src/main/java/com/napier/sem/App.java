@@ -69,6 +69,12 @@ public class App
         {
             System.out.println("//////////////////////");
         }
+        // Query 9
+        a.getCitiesLargestPopToSmallest();
+        for   ( int i = 0 ; i<=4; i++)
+        {
+            System.out.println("//////////////////////");
+        }
 
 
 
@@ -411,6 +417,36 @@ public void getTopPoppulatedCountries(int n)
             System.out.println(e.getMessage());
         }
     }
+/**
+ * Query 8
+ */
+public void getCitiesLargestPopToSmallest() {
+    try {
+        // Create an SQL statement
+        Statement stmt = con.createStatement();
+        // Create string for SQL statement
+        String strSelect = "SELECT city.Name As City, city.Population, country.Region " +
+                "FROM city JOIN country on city.CountryCode=country.Code " +
+                "ORDER BY Population DESC";
+        // Execute SQL statement
+        ResultSet rset = stmt.executeQuery(strSelect);
+        // Process the result set
+        processCitiesResultSet(rset);
+    } catch (SQLException e) {
+        System.out.println("Error executing query: " + e.getMessage());
+    }
+}
 
+    private void processCitiesResultSet(ResultSet rset) throws SQLException {
+        while (rset.next()) {
+            // Retrieve data from result set
+            String city = rset.getString("City");
+            int population = rset.getInt("Population");
+            String region = rset.getString("Region");
+
+            // Display values
+            System.out.println(city + "\t" + population + "\t" + region);
+        }
+    }
 
 }
