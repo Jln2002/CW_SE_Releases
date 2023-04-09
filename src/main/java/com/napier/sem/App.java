@@ -75,6 +75,28 @@ public class App
         {
             System.out.println("//////////////////////");
         }
+        // query 10
+        a.getCitiesLargestPopInCountry("Pakistan");
+        for   ( int i = 0 ; i<=2; i++)
+        {
+            System.out.println("//////////////////////");
+        }
+        // query 11
+        a.getCitiesLargestPopInDistrict("karachi");
+        for   ( int i = 0 ; i<=2; i++)
+        {
+            System.out.println("//////////////////////");
+        }
+
+
+
+        // query 12
+      a.getTopPopulatedCities(6);
+        for   ( int i = 0 ; i<=2; i++)
+        {
+            System.out.println("//////////////////////");
+        }
+
 
 
 
@@ -82,6 +104,9 @@ public class App
         // Disconnect from database
         a.disconnect();
     }
+
+
+
     /**
      * Connect to the MySQL database.
      */
@@ -418,7 +443,7 @@ public void getTopPoppulatedCountries(int n)
         }
     }
 /**
- * Query 8
+ * Query 9
  */
 public void getCitiesLargestPopToSmallest() {
     try {
@@ -448,5 +473,79 @@ public void getCitiesLargestPopToSmallest() {
             System.out.println(city + "\t" + population + "\t" + region);
         }
     }
+
+    /**
+     * Query 10
+     */
+    public void getCitiesLargestPopInCountry(String countryName) {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT Name AS City, Population, District " +
+                            "FROM city " +
+                            "WHERE CountryCode = (SELECT Code FROM country WHERE Name = '" + countryName + "') " +
+                            "ORDER BY Population DESC;";
+            ResultSet rset = stmt.executeQuery(strSelect);
+            while (rset.next()) {
+                String cityName = rset.getString("City");
+                int population = rset.getInt("Population");
+                System.out.println(cityName + " - " + population);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    /**
+     * Query 11
+     */
+    public void getCitiesLargestPopInDistrict(String districtName) {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.Name AS City, city.Population, city.District " +
+                            "FROM city " +
+                            "WHERE city.District = '" + districtName + "' " +
+                            "ORDER BY city.Population DESC;";
+            ResultSet rset = stmt.executeQuery(strSelect);
+            while (rset.next()) {
+                String cityName = rset.getString("City");
+                int population = rset.getInt("Population");
+                System.out.println(cityName + " - " + population);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+
+
+    /**
+         * Query 12
+         */
+        public void getTopPopulatedCities(int limit) {
+            try {
+                Statement stmt = con.createStatement();
+                String strSelect = "SELECT Name As City, Population FROM city ORDER BY Population DESC LIMIT " + limit;
+                ResultSet rset = stmt.executeQuery(strSelect);
+                while (rset.next()) {
+                    String cityName = rset.getString("City");
+                    int population = rset.getInt("Population");
+                    System.out.println(cityName + " - " + population);
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+
+
+
+
+
+
 
 }
