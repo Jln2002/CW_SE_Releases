@@ -116,10 +116,16 @@ public class App
         }
       // Query 16
         a.getTopNCitiesInDistrict("Europe", 5);
+        for (int i = 0 ; i<=4; i++)
         {
             System.out.println("////////////////////////");
         }
-
+      // Query 17
+        a.getCapitalCitiesLargestPop();
+        for (int i = 0 ; i<=4; i++)
+        {
+            System.out.println("////////////////////////");
+        }
 
 
         // Disconnect from database
@@ -676,6 +682,29 @@ public void getCitiesLargestPopToSmallest() {
                 String cityName = rset.getString("City");
                 int population = rset.getInt("Population");
                 System.out.println(cityName + " - " + population);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    /**
+     * Query 17
+     */
+    public void getCapitalCitiesLargestPop() {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect = "SELECT city.Name AS CapitalCity, country.Name AS Country, city.Population "
+                    + "FROM city "
+                    + "JOIN country ON city.ID = country.Capital "
+                    + "ORDER BY city.Population DESC";
+            ResultSet rset = stmt.executeQuery(strSelect);
+            while (rset.next()) {
+                String capitalCity = rset.getString("CapitalCity");
+                String country = rset.getString("Country");
+                int population = rset.getInt("Population");
+                System.out.println(capitalCity + " - " + country + " - " + population);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
