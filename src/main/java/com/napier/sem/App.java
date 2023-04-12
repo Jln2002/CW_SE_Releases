@@ -141,7 +141,11 @@ public class App
         {
             System.out.println("Answer for Query 20");
         }
-
+       // Query 21
+        a.getTopNCapitalCitiesInContinent("Europe", 6);
+        {
+            System.out.println("Answer for query 21");
+        }
 
         // Disconnect from database
         a.disconnect();
@@ -806,6 +810,39 @@ public void getTopNCapitalCities(int n) {
             System.out.println(capitalCity + " - " + country + " - " + population);
         }
 
+    } catch (SQLException e) {
+        System.out.println(e.getMessage());
+    }
+}
+/**
+ * Query 21 Top N captian cities in a continent
+ */
+public void getTopNCapitalCitiesInContinent(String ContinentName, int n) {
+    try {
+        // Create an SQL statement
+        Statement stmt = con.createStatement();
+
+        // Create string for SQL statement
+        String strSelect =
+                "SELECT city.Name AS CapitalCity, country.Name AS Country, country.Continent, city.Population " +
+                        "FROM city " +
+                        "JOIN country ON city.ID = country.Capital " +
+                        "WHERE country.Continent = '" + ContinentName + "' " +
+                        "ORDER BY city.Population DESC " +
+                        "LIMIT " + n + ";";
+
+        // Execute SQL statement
+        ResultSet rset = stmt.executeQuery(strSelect);
+
+        // Process the result set
+        while (rset.next()) {
+            String capitalCity = rset.getString("CapitalCity");
+            String country = rset.getString("Country");
+            String continent = rset.getString("Continent");
+            int population = rset.getInt("Population");
+
+            System.out.println(capitalCity + " - " + country + " - " + continent + " - " + population);
+        }
     } catch (SQLException e) {
         System.out.println(e.getMessage());
     }
