@@ -146,7 +146,11 @@ public class App
         {
             System.out.println("Answer for query 21");
         }
-
+       // Query 22
+        a.getPopulationByContinent();
+        {
+            System.out.println("Answer for query 22");
+        }
         // Disconnect from database
         a.disconnect();
     }
@@ -847,6 +851,40 @@ public void getTopNCapitalCitiesInContinent(String ContinentName, int n) {
         System.out.println(e.getMessage());
     }
 }
+
+    public void getPopulationByContinent() {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT country.Continent, " +
+                            "SUM(country.Population) AS TotalPopulation, " +
+                            "SUM(city.Population) AS UrbanPopulation, " +
+                            "SUM(country.Population) - SUM(city.Population) AS RuralPopulation " +
+                            "FROM country " +
+                            "LEFT JOIN city ON country.Capital = city.ID " +
+                            "GROUP BY country.Continent;";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            // Process the result set
+            while (rset.next()) {
+                String continent = rset.getString("Continent");
+                long totalPopulation = rset.getLong("TotalPopulation");
+                long urbanPopulation = rset.getLong("UrbanPopulation");
+                long ruralPopulation = rset.getLong("RuralPopulation");
+
+                System.out.println(continent + " - Total: " + totalPopulation +
+                        ", Urban: " + urbanPopulation + ", Rural: " + ruralPopulation);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
 
 }
