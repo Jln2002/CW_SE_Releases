@@ -126,6 +126,21 @@ public class App
         {
             System.out.println("////////////////////////");
         }
+    // Query 18
+        a.getCapitalCitiesByContinent("Europe");
+        {
+            System.out.println("Answer for Query 18 is above...........");
+        }
+        // Query 19
+        a.getCapitalCitiesLargestPopInRegion("Eastern Asia");
+        {
+            System.out.println("Answer for query 19..........");
+        }
+        // Query 20
+        a.getTopNCapitalCities(10);
+        {
+            System.out.println("Answer for Query 20");
+        }
 
 
         // Disconnect from database
@@ -710,9 +725,91 @@ public void getCitiesLargestPopToSmallest() {
             System.out.println(e.getMessage());
         }
     }
+    /**
+     * Query 18 Capital citites in a continent
+     */
 
+    public void getCapitalCitiesByContinent(String continentName) {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.Name AS CapitalCity, country.Name AS Country, country.Continent, city.Population " +
+                            "FROM city " +
+                            "JOIN country ON city.ID = country.Capital " +
+                            "WHERE country.Continent = '" + continentName + "' " +
+                            "ORDER BY city.Population DESC;";
+            ResultSet rset = stmt.executeQuery(strSelect);
+            while (rset.next()) {
+                String capitalCityName = rset.getString("CapitalCity");
+                String countryName = rset.getString("Country");
+                String continent = rset.getString("Continent");
+                int population = rset.getInt("Population");
+                System.out.println(capitalCityName + " - " + countryName + " - " + continent + " - " + population);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+/**
+ * Query 19 Capital cities in a region
+ */
+public void getCapitalCitiesLargestPopInRegion(String regionName) {
+    try {
+        // Create an SQL statement
+        Statement stmt = con.createStatement();
+        // Create string for SQL statement
+        String strSelect = "SELECT city.Name AS CapitalCity, country.Name AS Country, country.Region, city.Population " +
+                "FROM city " +
+                "JOIN country ON city.ID = country.Capital " +
+                "WHERE country.Region = '" + regionName + "' " +
+                "ORDER BY city.Population DESC;";
+        ResultSet rset = stmt.executeQuery(strSelect);
+        while (rset.next()) {
+            String cityName = rset.getString("CapitalCity");
+            String countryName = rset.getString("Country");
+            String region = rset.getString("Region");
+            int population = rset.getInt("Population");
+            System.out.println(cityName + " - " + countryName + " (" + region + ")" + " - " + population);
+        }
+    } catch (SQLException e) {
+        System.out.println(e.getMessage());
+    }
+}
 
+/**
+ * Query 20 top n populated capital cities.
+ */
+public void getTopNCapitalCities(int n) {
+    try {
+        // Create an SQL statement
+        Statement stmt = con.createStatement();
 
+        // Create string for SQL statement
+        String strSelect =
+                "SELECT city.Name AS CapitalCity, country.Name AS Country, city.Population " +
+                        "FROM city " +
+                        "JOIN country ON city.ID = country.Capital " +
+                        "ORDER BY city.Population DESC " +
+                        "LIMIT " + n + ";";
+
+        // Execute SQL statement
+        ResultSet rset = stmt.executeQuery(strSelect);
+
+        // Process the result set
+        while (rset.next()) {
+            String capitalCity = rset.getString("CapitalCity");
+            String country = rset.getString("Country");
+            int population = rset.getInt("Population");
+
+            System.out.println(capitalCity + " - " + country + " - " + population);
+        }
+
+    } catch (SQLException e) {
+        System.out.println(e.getMessage());
+    }
+}
 
 
 }
