@@ -151,6 +151,26 @@ public class App
         {
             System.out.println("Answer for query 22");
         }
+        //Query 23
+        a.getPopulationByRegion();
+        {
+            System.out.println("Answer for query 23");
+        }
+       // Query 24
+        a.getPopulationStatsByCountry();
+        {
+            System.out.println("Answer for query 24");
+        }
+       // Query 25
+        a.getWorldPopulation();
+        {
+            System.out.println("Answer for query 25 is above");
+        }
+        // Query 26
+        a.getContinentPopulation("Africa");
+        {
+            System.out.println("Answer for query 26 is above");
+        }
         // Disconnect from database
         a.disconnect();
     }
@@ -852,6 +872,9 @@ public void getTopNCapitalCitiesInContinent(String ContinentName, int n) {
     }
 }
 
+    /**
+     * Query 22
+     */
     public void getPopulationByContinent() {
         try {
             // Create an SQL statement
@@ -886,5 +909,130 @@ public void getTopNCapitalCitiesInContinent(String ContinentName, int n) {
         }
     }
 
+    /**
+     * Query 23
+     */
+    public void getPopulationByRegion() {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+
+            // Create string for SQL statement
+            String strSelect = "SELECT country.Region, " +
+                    "SUM(country.Population) AS TotalPopulation, " +
+                    "SUM(city.Population) AS UrbanPopulation, " +
+                    "SUM(country.Population) - SUM(city.Population) AS RuralPopulation " +
+                    "FROM country " +
+                    "LEFT JOIN city ON country.Capital = city.ID " +
+                    "GROUP BY country.Region;";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            // Process the result set
+            while (rset.next()) {
+                String region = rset.getString("Region");
+                long totalPopulation = rset.getInt("TotalPopulation");
+                long urbanPopulation = rset.getInt("UrbanPopulation");
+                long ruralPopulation = rset.getInt("RuralPopulation");
+
+                System.out.println(region + " - total " + totalPopulation + " - urban " + urbanPopulation + " - rural " + ruralPopulation);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    /**
+     * Query 24
+     */
+    public void getPopulationStatsByCountry() {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT country.Name As Country, " +
+                            "SUM(country.Population) AS TotalPopulation, " +
+                            "SUM(city.Population) AS UrbanPopulation, " +
+                            "SUM(country.Population) - SUM(city.Population) AS RuralPopulation " +
+                            "FROM country " +
+                            "LEFT JOIN city ON country.Capital = city.ID " +
+                            "GROUP BY country.Name;";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            // Process the result set
+            while (rset.next()) {
+                String country = rset.getString("Country");
+                long totalPopulation = rset.getInt("TotalPopulation");
+                long urbanPopulation = rset.getInt("UrbanPopulation");
+                long ruralPopulation = rset.getInt("RuralPopulation");
+
+                System.out.println(country + " - Total population: " + totalPopulation
+                        + " Urban population: " + urbanPopulation
+                        + " Rural population: " + ruralPopulation);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    /**
+     * Query 25
+     */
+    public void getWorldPopulation() {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+
+            // Create string for SQL statement
+            String strSelect = "SELECT SUM(Population) AS WorldPopulation FROM country;";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            // Process the result set
+            if (rset.next()) {
+                long worldPopulation = rset.getLong("WorldPopulation");
+                System.out.println("World Population: " + worldPopulation);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    /**
+     * Query 26
+     */
+    public void getContinentPopulation(String continent) {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT Continent, SUM(Population) AS ContinentPopulation " +
+                            "FROM country " +
+                            "WHERE Continent = '" + continent + "' " +
+                            "GROUP BY Continent";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            // Process the result set
+            while (rset.next()) {
+                String continentName = rset.getString("Continent");
+                long population = rset.getLong("ContinentPopulation");
+
+                System.out.println("Population of " + continentName + ": " + population);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
 }
