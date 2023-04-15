@@ -96,37 +96,37 @@ public class App
         {
             System.out.println("//////////////////////");
         }
-      // Query 13
+        // Query 13
         a.getTopPopulatedCitiesInContinent("Europe", 10);
         for   ( int i = 0 ; i<=3; i++)
         {
             System.out.println("//////////////////////");
         }
-      // Query 14
+        // Query 14
         a.getNCitiesLargestPopInRegion("Eastern Asia" , 6);
         for   ( int i = 0 ; i<=3; i++)
         {
             System.out.println("//////////////////////");
         }
-     // Query 15
+        // Query 15
         a.getTopNCitiesInCountry("Portugal", 5);
         for (int i = 0 ; i<=4; i++)
         {
             System.out.println("////////////////////////");
         }
-      // Query 16
+        // Query 16
         a.getTopNCitiesInDistrict("Europe", 5);
         for (int i = 0 ; i<=4; i++)
         {
             System.out.println("////////////////////////");
         }
-      // Query 17
+        // Query 17
         a.getCapitalCitiesLargestPop();
         for (int i = 0 ; i<=4; i++)
         {
             System.out.println("////////////////////////");
         }
-    // Query 18
+        // Query 18
         a.getCapitalCitiesByContinent("Europe");
         {
             System.out.println("Answer for Query 18 is above...........");
@@ -171,6 +171,27 @@ public class App
         {
             System.out.println("Answer for query 26 is above");
         }
+        // Query 27
+        a.getRegionPopulation();
+        {
+            System.out.println("Answer for query 27 is above");
+        }
+        // Query 28
+        a.getCountryPopulation();
+        {
+            System.out.println("Answer for query 28 is above");
+        }
+        // Query 29
+        a.getPopulationByDistrict();
+        {
+            System.out.println("Answer for query 29 is above");
+        }
+        // Query 30
+        a.getCityPopulation();
+        {
+            System.out.println("Answer for query 30 is above");
+        }
+
         // Disconnect from database
         a.disconnect();
     }
@@ -1034,5 +1055,118 @@ public void getTopNCapitalCitiesInContinent(String ContinentName, int n) {
             System.out.println(e.getMessage());
         }
     }
+    /**
+     * Query 27
+     */
+    public void getRegionPopulation() {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+
+            // Create string for SQL statement
+            String strSelect = "SELECT Region, SUM(Population) AS RegionPopulation FROM country GROUP BY Region;";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            // Process the result set
+            while (rset.next()) {
+                String region = rset.getString("Region");
+                long population = rset.getLong("RegionPopulation");
+
+                System.out.println(region + " - " + population);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+/**
+ * Query 28
+ */
+public void getCountryPopulation() {
+    try {
+        // Create an SQL statement
+        Statement stmt = con.createStatement();
+
+        // Create string for SQL statement
+        String strSelect =
+                "SELECT Name As Country ,SUM(Population) AS CountryPopulation " +
+                        "FROM country " +
+                        "GROUP BY Name";
+
+        // Execute SQL statement
+        ResultSet rset = stmt.executeQuery(strSelect);
+
+        // Process the result set
+        while (rset.next()) {
+            String country = rset.getString("Country");
+            long population = rset.getLong("CountryPopulation");
+
+            System.out.println(country + " - " + population);
+        }
+
+    } catch (SQLException e) {
+        System.out.println(e.getMessage());
+    }
+}
+/**
+ * Query 29
+ */
+public void getPopulationByDistrict() {
+    try {
+        // Create an SQL statement
+        Statement stmt = con.createStatement();
+
+        // Create string for SQL statement
+        String strSelect =
+                "SELECT District ,SUM(Population) AS DistrictPopulation " +
+                        "FROM city " +
+                        "GROUP BY District;";
+
+        // Execute SQL statement
+        ResultSet rset = stmt.executeQuery(strSelect);
+
+        // Process the result set
+        while (rset.next()) {
+            String district = rset.getString("District");
+            int population = rset.getInt("DistrictPopulation");
+
+            System.out.println(district + " - " + population);
+        }
+
+    } catch (SQLException e) {
+        System.out.println(e.getMessage());
+    }
+}
+/**
+ * Query 30
+ */
+public void getCityPopulation() {
+    try {
+        // Create an SQL statement
+        Statement stmt = con.createStatement();
+
+        // Create string for SQL statement
+        String strSelect =
+                "SELECT Name AS City, SUM(Population) AS CityPopulation " +
+                        "FROM city " +
+                        "GROUP BY Name;";
+
+        // Execute SQL statement
+        ResultSet rset = stmt.executeQuery(strSelect);
+
+        // Process the result set
+        while (rset.next()) {
+            String city = rset.getString("City");
+            int population = rset.getInt("CityPopulation");
+
+            System.out.println(city + " - " + population);
+        }
+
+    } catch (SQLException e) {
+        System.out.println(e.getMessage());
+    }
+}
 
 }
