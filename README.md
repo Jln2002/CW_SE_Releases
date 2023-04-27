@@ -13,10 +13,8 @@ the main repository for the CW
 | 4  | The top N populated countries in the world where N is provided by the user.    | Yes | ![Graphical user interface, application Description automatically generated](./infofiles/Query 4.PNG)|
 | 5  | The top N populated countries in a continent where N is provided by the user.    | Yes | ![Graphical user interface, application Description automatically generated](./infofiles/Query 5.PNG)|
 | 6  | The top N populated countries in a region where N is provided by the user.    | Yes | ![Graphical user interface, application Description automatically generated](./infofiles/Query 6.PNG)|
-| 7  | All the cities in the world organised by largest population to smallest.
-    | Yes | ![Graphical user interface, application Description automatically generated](./infofiles/Query 7.PNG)|
-| 8  | All the cities in a continent organised by largest population to smallest.
-     | Yes | ![Graphical user interface, application Description automatically generated](./infofiles/Query 8.PNG)|
+| 7  | All the cities in the world organised by largest population to smallest. | Yes | ![Graphical user interface, application Description automatically generated](./infofiles/Query 7.PNG)|
+| 8  | All the cities in a continent organised by largest population to smallest. | Yes | ![Graphical user interface, application Description automatically generated](./infofiles/Query 8.PNG)|
 | 9  | All the cities in a region organised by largest population to smallest.    | Yes | ![Graphical user interface, application Description automatically generated](./infofiles/Query 9.PNG)|
 | 10  | All the cities in a country organised by largest population to smallest.     | Yes | ![Graphical user interface, application Description automatically generated](./infofiles/Query 10.PNG)|
 | 11  | All the cities in a district organised by largest population to smallest.     | Yes | ![Graphical user interface, application Description automatically generated](./infofiles/Query 11.PNG)|
