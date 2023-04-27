@@ -5,10 +5,9 @@ the main repository for the CW
 [![LICENSE](https://img.shields.io/github/license/Jln2002/CW_SE_Releases.svg?style=flat-square)](https://github.com/<Jln2002>/CW_SE_Releases/blob/master/LICENSE)
 [![Releases](https://img.shields.io/github/release/Jln2002/CW_SE_Releases/all.svg?style=flat-square)](https://github.com/<Jln2002>/CW_SE_Releases/releases)
 
-
-
-![Graphical user interface, application Description automatically
-generated](./infofiles/Capture.PNG)
+| ID | Name | Met | ScreenShot |
+|:---|:----:|:---:|-----------:|
+| 1  | all countrys biggest to smallest     | Yes | ![Graphical user interface, application Description automatically generated](./infofiles/Capture.PNG)|
 
 ![Graphical user interface, application Description automatically
 generated](./infofiles/Query%202.PNG)
