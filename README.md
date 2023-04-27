@@ -4,3 +4,21 @@ the main repository for the CW
 ![GitHub Workflow Status (with branch)](https://img.shields.io/github/actions/workflow/status/Jln2002/CW_SE_Releases/main.yml?branch=Developer)
 [![LICENSE](https://img.shields.io/github/license/Jln2002/CW_SE_Releases.svg?style=flat-square)](https://github.com/<Jln2002>/CW_SE_Releases/blob/master/LICENSE)
 [![Releases](https://img.shields.io/github/release/Jln2002/CW_SE_Releases/all.svg?style=flat-square)](https://github.com/<Jln2002>/CW_SE_Releases/releases)
+
+
+
+
+
+
+
+
+
+
+
+
+
+| Mat Number | CR1 | CR2 | CR3 | CR4 |
+|:-----------|:---:|:---:|:---:|----:|
+ | 40597506  | 33% | 33% | 40% | 40% |
+| 40598699 | 33% | 33% | 20% | 20% |
+| 40521893 | 33% | 33% | 40% | 40% |
