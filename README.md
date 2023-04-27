@@ -28,9 +28,15 @@ the main repository for the CW
 | 19  | All the capital cities in a region organised by largest to smallest.    | Yes | ![Graphical user interface, application Description automatically generated](./infofiles/Query%2019.PNG)|
 | 20  | The top N populated capital cities in the world where N is provided by the user..    | Yes | ![Graphical user interface, application Description automatically generated](./infofiles/Query%2020.PNG)|
 | 21  | The top N populated capital cities in a continent where N is provided by the user.    | Yes | ![Graphical user interface, application Description automatically generated](./infofiles/Query%2021.PNG)|
-| 22  | The top N populated capital cities in a region where N is provided by the user.    | Yes | ![Graphical user interface, application Description automatically generated](./infofiles/Query%2022.PNG)|
-
-
+| 22  | The population of people, people living in cities, and people not living in cities in each continent.    | Yes | ![Graphical user interface, application Description automatically generated](./infofiles/Query%2022.PNG)|
+| 23  | The population of people, people living in cities, and people not living in cities in each region.    | Yes | ![Graphical user interface, application Description automatically generated](./infofiles/Query%2023.PNG)|
+| 24  | The population of people, people living in cities, and people not living in cities in each country.    | Yes | ![Graphical user interface, application Description automatically generated](./infofiles/Query%2024.PNG)|
+| 25  | The population of the world.    | Yes | ![Graphical user interface, application Description automatically generated](./infofiles/Query%2025.PNG)|
+| 26  | The population of a continent.    | Yes | ![Graphical user interface, application Description automatically generated](./infofiles/Query%2026.PNG)|
+| 27  | The population of the region.    | Yes | ![Graphical user interface, application Description automatically generated](./infofiles/Query%2027.PNG)|
+| 28  | The population of the country.    | Yes | ![Graphical user interface, application Description automatically generated](./infofiles/Query%2028.PNG)|
+| 29  | The population of a District.    | Yes | ![Graphical user interface, application Description automatically generated](./infofiles/Query%2029.PNG)|
+| 30  | The population of a city.    | Yes | ![Graphical user interface, application Description automatically generated](./infofiles/Query%2030.PNG)|
 
 | Mat Number | CR1 | CR2 | CR3 | CR4 |
 |:-----------|:---:|:---:|:---:|----:|
