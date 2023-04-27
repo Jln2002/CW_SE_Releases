@@ -7,13 +7,32 @@ the main repository for the CW
 
 
 
+![Graphical user interface, application Description automatically
+generated](./infofiles/Capture.PNG)
 
+![Graphical user interface, application Description automatically
+generated](./infofiles/Query%202.PNG)
 
+![Graphical user interface, application Description automatically
+generated](./infofiles/query%203.PNG)
 
+![Graphical user interface, application Description automatically
+generated](./infofiles/Query%204.PNG)
 
+![Graphical user interface, application Description automatically
+generated](./infofiles/Query%205.PNG)
 
+![Graphical user interface, application Description automatically
+generated](./infofiles/Query%206.PNG)
 
+![Graphical user interface, application Description automatically
+generated](./infofiles/Query%207.PNG)
 
+![Graphical user interface, application Description automatically
+generated](./infofiles/Query%208.PNG)
+
+![Graphical user interface, application Description automatically
+generated](./infofiles/Query%209.PNG)
 
 
 
