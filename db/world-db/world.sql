@@ -5416,6 +5416,7 @@ INSERT INTO `countrylanguage` VALUES ('ZWE','Nyanja','F',2.2);
 INSERT INTO `countrylanguage` VALUES ('ZWE','Shona','F',72.1);
 commit;
 
+
 --
 -- Dumping events for database 'world'
 --
