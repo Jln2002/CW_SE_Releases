@@ -8,7 +8,7 @@ the main repository for the CW
 | ID | Name | Met | ScreenShot |
 |:---|:----:|:---:|-----------:|
 | 1  | all countrys biggest to smallest     | Yes | ![Graphical user interface, application Description automatically generated](./infofiles/Capture.PNG)|
-| 2  | all countrys biggest to smallest     | Yes | ![Graphical user interface, application Description automatically generated](./infofiles/Query 2.PNG)|
+| 2  | all countrys biggest to smallest     | Yes | ![Graphical user interface, application Description automatically generated](./infofiles/Query2.PNG)|
 | 3  | all countrys biggest to smallest     | Yes | ![Graphical user interface, application Description automatically generated](./infofiles/Query 3.PNG)|
 | 4  | all countrys biggest to smallest     | Yes | ![Graphical user interface, application Description automatically generated](./infofiles/Query 4.PNG)|
 | 5  | all countrys biggest to smallest     | Yes | ![Graphical user interface, application Description automatically generated](./infofiles/Query 5.PNG)|
