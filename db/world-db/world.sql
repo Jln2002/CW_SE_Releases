@@ -5414,6 +5414,9 @@ INSERT INTO `countrylanguage` VALUES ('ZWE','English','T',2.2);
 INSERT INTO `countrylanguage` VALUES ('ZWE','Ndebele','F',16.2);
 INSERT INTO `countrylanguage` VALUES ('ZWE','Nyanja','F',2.2);
 INSERT INTO `countrylanguage` VALUES ('ZWE','Shona','F',72.1);
+
+
+
 commit;
 
 
